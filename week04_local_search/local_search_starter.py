@@ -157,9 +157,17 @@ def hill_climbing(problem, start_board):
 
     current = start_board
 
+    while True:
+        neighbours = generate_neighbours(problem,current)
+        best = min(neighbours, key = count_conflicts) # picks neighbouur with fewest conflicts
+
+        if count_conflicts(best) >= count_conflicts(current):
+            return current # no neighbour is better , so stop 
+
+        current = best
     # TODO
 
-    pass
+    
 
 
 # --------------------------------------------------
@@ -184,7 +192,16 @@ def simulated_annealing(problem, start_board):
 
     # TODO
 
-    pass
+    while temperature > 0.01 and count_conflicts(current) > 0:
+        neighbour = random.choice(generate_neighbours(problem, current))
+        delta = count_conflicts(neighbour) - count_conflicts(current)
+
+        if delta <= 0 or random.random() < math.exp(-delta / temperature):
+            current = neighbour
+
+        temperature *= cooling_rate
+
+    return current
 
 
 # --------------------------------------------------
