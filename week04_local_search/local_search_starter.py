@@ -243,3 +243,16 @@ if __name__ == "__main__":
     print(
         f"{len(neighbours)} neighbours generated"
     )
+
+    print("\nExample board conflicts (should be 6)")
+    print(count_conflicts(example_board))
+
+    print("\nHill Climbing")
+    hc_result = hill_climbing(problem, board)
+    print(hc_result)
+    print("Conflicts:", count_conflicts(hc_result))
+
+    print("\nSimulated Annealing")
+    sa_result = simulated_annealing(problem, board)
+    print(sa_result)
+    print("Conflicts:", count_conflicts(sa_result))
