@@ -77,12 +77,11 @@ def is_valid_assignment(assignment):
     # 4. Otherwise return True.
     pass
 
-    def is_valid_assignment(assignment):
-        for region1, region2 in constraints:
-            if region1 in assignment and region2 in assignment:
-                if assignment[region1] == assignment[region2]:
-                    return False
-        return True
+    for region1, region2 in constraints:
+        if region1 in assignment and region2 in assignment:
+            if assignment[region1] == assignment[region2]:
+                return False
+    return True
 
 
 # --------------------------------------------------
@@ -101,6 +100,12 @@ def select_unassigned_variable(assignment):
     # TASK 3 TODO:
     # Return the first variable not in assignment, or None if all
     # variables have been assigned.
+
+
+    for var in variables:
+        if var in variables:
+            if var not in assignment:
+                return var
     #
     # TASK 5 TODO (after backtracking works):
     # For each unassigned variable, temporarily try each colour,
@@ -124,6 +129,23 @@ def backtracking_search(assignment):
     # 6. Otherwise remove the temporary assignment (backtrack).
     # 7. Return None if every colour fails.
     pass
+
+    if len(assignment) == len(variables):
+        return assignment
+
+    variable = select_unassigned_variable(assignment)
+
+    for value in domains[variable]:
+        assignment[variable] = value
+
+        if is_valid_assignment(assignment):
+            result = backtracking_search(assignment)
+            if result is not None:
+                return result
+
+        del assignment[variable]
+
+    return None
 
 
 # --------------------------------------------------
