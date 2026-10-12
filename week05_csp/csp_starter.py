@@ -77,6 +77,13 @@ def is_valid_assignment(assignment):
     # 4. Otherwise return True.
     pass
 
+    def is_valid_assignment(assignment):
+        for region1, region2 in constraints:
+            if region1 in assignment and region2 in assignment:
+                if assignment[region1] == assignment[region2]:
+                    return False
+        return True
+
 
 # --------------------------------------------------
 # TASK 3 AND TASK 5 — VARIABLE SELECTION
