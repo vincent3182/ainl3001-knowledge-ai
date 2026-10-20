@@ -57,6 +57,15 @@ def print_board(state):
     pass
 
 
+    for row in range(3):
+
+        start = row * 3
+
+        print(" " + state[start]+ "|" + state[start + 1] + "|" +state[start + 2])
+
+        if row < 2:
+            print("---+---+---")
+
 # --------------------------------------------------
 # TASK 1 — AVAILABLE MOVES
 # --------------------------------------------------
@@ -64,8 +73,15 @@ def print_board(state):
 def available_moves(state):
     """Return indices of empty cells (0 through 8)."""
     # TODO: Find every position containing " ".
-    pass
+    
+    moves = []
 
+    for position in range(9):
+
+        if state[position] == " ":
+            moves.append(position)
+
+        return moves
 
 # --------------------------------------------------
 # TASK 1 — MAKE A MOVE
@@ -77,9 +93,12 @@ def make_move(state, move, player):
     Assume move is legal. Do not modify the input board.
     """
     # TODO: Copy the board and place the player's mark.
-    pass
+    
+    new_state = state.cpoy()
 
+    new_state[move] = player
 
+    return new_state
 # --------------------------------------------------
 # TASK 2 — WINNER
 # --------------------------------------------------
@@ -87,7 +106,12 @@ def make_move(state, move, player):
 def check_winner(state):
     """Return 'X', 'O' or None by checking all winning lines."""
     # TODO: Check each (a, b, c) in WINNING_LINES.
-    pass
+    
+    for a,b,c in WINNING_LINES:
+
+        if state[a] != " " and state[a] == state[b] == state[c]:
+            return state[a]
+    
 
 
 # --------------------------------------------------
@@ -98,6 +122,8 @@ def is_terminal(state):
     """Return True for a win or a full board (draw)."""
     # TODO: Detect a winner OR no remaining empty cells.
     pass
+
+    
 
 
 # --------------------------------------------------
@@ -129,7 +155,9 @@ def minimax(state, maximizing, counter):
     # 3. For X (MAX), recursively choose the highest score.
     # 4. For O (MIN), recursively choose the lowest score.
     # Use make_move() to avoid changing the original board.
-    pass
+    
+
+
 
 
 # --------------------------------------------------
