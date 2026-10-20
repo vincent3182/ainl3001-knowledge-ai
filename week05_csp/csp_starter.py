@@ -75,11 +75,10 @@ def is_valid_assignment(assignment):
     # 2. If BOTH regions have been assigned, compare their colours.
     # 3. Return False if neighbouring regions have the same colour.
     # 4. Otherwise return True.
-    pass
 
-    for region1, region2 in constraints:
-        if region1 in assignment and region2 in assignment:
-            if assignment[region1] == assignment[region2]:
+    for region_1, region_2 in constraints:
+        if region_1 in assignment and region_2 in assignment:
+            if assignment[region_1] == assignment[region_2]:
                 return False
     return True
 
@@ -89,29 +88,30 @@ def is_valid_assignment(assignment):
 # --------------------------------------------------
 
 def select_unassigned_variable(assignment):
-    """Choose the next unassigned region.
+    """Choose the next unassigned region using MRV.
 
-    Task 3: First return the FIRST unassigned region.
-
-    Task 5: Replace that approach with MRV (Minimum Remaining Values):
-    choose the unassigned region with the FEWEST currently legal
+    Choose the unassigned region with the FEWEST currently legal
     colours. Break ties by keeping the first region in variables.
     """
-    # TASK 3 TODO:
-    # Return the first variable not in assignment, or None if all
-    # variables have been assigned.
 
+    best_variable = None
+    fewest_legal = None
 
-    for var in variables:
-        if var in variables:
-            if var not in assignment:
-                return var
-    #
-    # TASK 5 TODO (after backtracking works):
-    # For each unassigned variable, temporarily try each colour,
-    # check is_valid_assignment(), and undo the temporary assignment.
-    # Count legal colours and choose the variable with the fewest.
-    pass
+    for variable in variables:
+        if variable not in assignment:
+            legal_count = 0
+
+            for colour in domains[variable]:
+                assignment[variable] = colour          # try it temporarily
+                if is_valid_assignment(assignment):
+                    legal_count = legal_count + 1
+                del assignment[variable]               # undo it
+
+            if fewest_legal is None or legal_count < fewest_legal:
+                best_variable = variable
+                fewest_legal = legal_count
+
+    return best_variable
 
 
 # --------------------------------------------------
@@ -128,15 +128,14 @@ def backtracking_search(assignment):
     # 5. Return the recursive result if a solution was found.
     # 6. Otherwise remove the temporary assignment (backtrack).
     # 7. Return None if every colour fails.
-    pass
 
     if len(assignment) == len(variables):
-        return assignment
+        return assignment.copy()
 
     variable = select_unassigned_variable(assignment)
 
-    for value in domains[variable]:
-        assignment[variable] = value
+    for colour in domains[variable]:
+        assignment[variable] = colour
 
         if is_valid_assignment(assignment):
             result = backtracking_search(assignment)
