@@ -70,6 +70,11 @@ if __name__ == "__main__":
     print("\nBefore coding, predict whether these can be inferred:")
     print("  take_umbrella?  stay_dry?  wear_coat?  Why?")
 
+
+    print("ANSWER: take_umbrella can be inferred as take_umbrella relies on rainy which is a known fact")
+    print("ANSWER: stay_dry can be inferred as stay_dry relies on take_umbrella which is a known fact")
+    print("ANSWER: wear_coat cannot be inferred as waer_coat is undefined and reads as false")
+    
     print("\n" + "=" * 55)
     print("TASKS 3–4 — FORWARD CHAINING AND QUERIES")
     print("=" * 55)
