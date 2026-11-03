@@ -8,7 +8,7 @@ BSP
 """
 
 # TASK 1 — Represent facts (provided; inspect and experiment).
-facts = {"rainy", "weekday"}
+facts = {"rainy", "weekday","cold"}
 
 # TASK 2 — Represent rules (provided; inspect and experiment).
 # Each rule is (list_of_required_facts, conclusion).
@@ -84,6 +84,13 @@ if __name__ == "__main__":
 
     print("\nTASK 5 — BACKWARD CHAINING (discussion)")
     print("Goal: stay_dry. Which rule concludes it? What must be true first?")
+
+    print("\nANSWER Task 5: for stay_dry to be the goal, take_umbrella must be true first")
+
     print("\nTASK 6 — LOGIC DISCUSSION")
     print("Is 'IF rainy THEN take_umbrella' always true in the real world?")
-    print("What assumptions does the rule make?")
+
+    print("\nANSWER Task 6: NOT always true in the real world as there are exceptions i.e not everyone will use an umbrella if rainy")
+
+    print("\nWhat assumptions does the rule make?")
+    print("ANSWER Task 6: Assumes that everyone will use an umbrella if rainy\n")
